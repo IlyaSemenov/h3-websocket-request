@@ -1,0 +1,7 @@
+{
+  "extends": "tsconfig-vite-node",
+  // TODO: only keep this in src/client/tsconfig.json (and fix tsup to pull it for the client build)
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"]
+  }
+}
