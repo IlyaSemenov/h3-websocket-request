@@ -1,7 +1,7 @@
 {
   "name": "h3-websocket-request",
   "type": "module",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "author": "Ilya Semenov",
   "license": "MIT",
