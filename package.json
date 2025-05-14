@@ -27,6 +27,13 @@
     "dist",
     "src"
   ],
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "10",
+      "onFail": "warn"
+    }
+  },
   "scripts": {
     "build": "tsup",
     "lint": "eslint --fix .",
