@@ -31,7 +31,7 @@
     "packageManager": {
       "name": "pnpm",
       "version": "10",
-      "onFail": "error"
+      "onFail": "warn"
     }
   },
   "scripts": {
