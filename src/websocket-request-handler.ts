@@ -96,11 +96,11 @@ export function defineWebsocketRequestHandler<T>(handler: WebsocketRequestHandle
           send({ _: "return", data })
           // 1000 indicates a normal closure, meaning that the purpose for
           // which the connection was established has been fulfilled.
-          peer.ctx.node.ws.close(1000)
+          peer.close(1000)
         }, (error) => {
           send({ _: "return", error: `${error}` })
           // Status codes in the range 4000-4999 are reserved for private use.
-          peer.ctx.node.ws.close(4000, "Unhandled exception in RPC handler.")
+          peer.close(4000, "Unhandled exception in RPC handler.")
         })
       } else if (frame._ === "callback") {
         // Response from client-side callback.

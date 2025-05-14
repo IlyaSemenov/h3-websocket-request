@@ -35,13 +35,13 @@
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
-    "h3": "^1.11.1"
+    "h3": "^1.15.3"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@ilyasemenov/eslint-config": "^1.4.1",
     "eslint": "^9.26.0",
-    "h3": "^1.11.1",
+    "h3": "^1.15.3",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "tsconfig-vite-node": "^1.1.2",
