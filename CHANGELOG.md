@@ -1,5 +1,12 @@
 # h3-websocket-request
 
+## 1.1.1
+
+### Patch Changes
+
+- 715dc43: Handle errors in synchronous client callbacks.
+- 80c5af6: Use fallback message when socket closes with empty string as a reason.
+
 ## 1.1.0
 
 ### Minor Changes
