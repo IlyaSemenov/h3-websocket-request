@@ -16,11 +16,11 @@ export function websocketRequest<T>(path: string, data?: any, callback?: Request
       // Note: reason could be empty string, use || not ??
       reject(reason || `Websocket closed (code ${code}).`)
     })
-    ws.addEventListener("message", async (message) => {
+    ws.addEventListener("message", (message) => {
       const frame = JSON.parse(message.data) as ServerFrame
       if (frame._ === "callback") {
         if (callback) {
-          await Promise.resolve(callback(frame.data)).then((res) => {
+          Promise.resolve().then(() => callback(frame.data)).then((res) => {
             send({ _: "callback", data: res })
           }, (error) => {
             send({ _: "callback", error: `${error}` })
