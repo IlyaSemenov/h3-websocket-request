@@ -1,5 +1,11 @@
 # h3-websocket-request
 
+## 1.2.0
+
+### Minor Changes
+
+- a962489: Always reject `websocketRequest` with instance of `Error`.
+
 ## 1.1.1
 
 ### Patch Changes
