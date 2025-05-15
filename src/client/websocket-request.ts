@@ -11,10 +11,12 @@ export function websocketRequest<T>(path: string, data?: any, callback?: Request
       // Send data with the first frame.
       send({ _: "start", data })
     })
-    ws.addEventListener("error", reject)
+    ws.addEventListener("error", () => {
+      reject(new Error("Websocket error."))
+    })
     ws.addEventListener("close", ({ code, reason }) => {
       // Note: reason could be empty string, use || not ??
-      reject(reason || `Websocket closed (code ${code}).`)
+      reject(new Error(reason || `Websocket closed (code ${code}).`))
     })
     ws.addEventListener("message", (message) => {
       const frame = JSON.parse(message.data) as ServerFrame
@@ -30,7 +32,7 @@ export function websocketRequest<T>(path: string, data?: any, callback?: Request
         }
       } else if (frame._ === "return") {
         if ("error" in frame) {
-          reject(frame.error)
+          reject(new Error(frame.error))
         } else {
           resolve(frame.data as T)
         }
