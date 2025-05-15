@@ -16,7 +16,8 @@ export async function websocketRequest<T>(path: string, data?: any, callback?: R
   return await new Promise((resolve, reject) => {
     ws.addEventListener("error", reject)
     ws.addEventListener("close", ({ code, reason }) => {
-      reject(reason ?? `Websocket closed (code ${code}).`)
+      // Note: reason could be empty string, use || not ??
+      reject(reason || `Websocket closed (code ${code}).`)
     })
     ws.addEventListener("message", async (message) => {
       const frame = JSON.parse(message.data) as ServerFrame
