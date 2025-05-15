@@ -2,18 +2,15 @@ import type { ClientFrame, ServerFrame } from "../websocket-request-handler"
 
 export type RequestCallback = (data: any) => any
 
-export async function websocketRequest<T>(path: string, data?: any, callback?: RequestCallback): Promise<T> {
+export function websocketRequest<T>(path: string, data?: any, callback?: RequestCallback): Promise<T> {
   const url = path.startsWith("/") ? (location.origin.replace(/^http/, "ws") + path) : path
   const ws = new WebSocket(url)
   const send = (frame: ClientFrame) => ws.send(JSON.stringify(frame))
-  await new Promise<void>((resolve, reject) => {
-    ws.addEventListener("error", reject)
+  return new Promise((resolve, reject) => {
     ws.addEventListener("open", () => {
-      ws.removeEventListener("error", reject)
-      resolve()
+      // Send data with the first frame.
+      send({ _: "start", data })
     })
-  })
-  return await new Promise((resolve, reject) => {
     ws.addEventListener("error", reject)
     ws.addEventListener("close", ({ code, reason }) => {
       // Note: reason could be empty string, use || not ??
@@ -39,7 +36,5 @@ export async function websocketRequest<T>(path: string, data?: any, callback?: R
         }
       }
     })
-    // Send data with the first frame.
-    send({ _: "start", data })
   })
 }
